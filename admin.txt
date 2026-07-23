@@ -1,0 +1,2 @@
+user: pixora_admin
+pass: admin
