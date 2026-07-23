@@ -1,0 +1,22 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+  <h1>{{ title }}</h1>
+  <p style="color:#6b7280;max-width:520px;line-height:1.5;">
+    Drop a folder of PNGs onto the file field and pick a category. Each file
+    becomes one sticker row; the filename (with dashes/underscores cleaned up
+    and titlecased) is used as the sticker name. You can rename or reorder
+    them afterwards from the regular sticker list.
+  </p>
+  <form method="post" enctype="multipart/form-data" style="margin-top:18px;max-width:520px;">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <div style="margin-top:14px;">
+      <button type="submit" class="default" style="padding:8px 18px;">{% trans 'Upload' %}</button>
+      <a href="{% url 'admin:stickers_sticker_changelist' %}" style="margin-left:12px;">{% trans 'Cancel' %}</a>
+    </div>
+  </form>
+{% endblock %}
