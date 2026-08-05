@@ -1,6 +1,4 @@
 from django.shortcuts import render
-
-# Create your views here.
 from django.db.models import Q
 from rest_framework import viewsets, permissions
 from rest_framework.pagination import PageNumberPagination

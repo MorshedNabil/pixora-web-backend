@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django import forms
 from django.utils.html import format_html
 from unfold.admin import ModelAdmin, TabularInline
@@ -90,13 +90,11 @@ class StickerAdmin(ModelAdmin):
     # Lives on the changelist; lets admins ingest a whole sticker pack with
     # one form post instead of clicking "Add sticker" 30 times in a row.
 
-    change_list_template = 'admin/stickers/change_list.html'
-
     def get_urls(self):
         from django.urls import path
         urls = super().get_urls()
         custom = [
-            path('bulk-upload/', self.admin_site.admin_view(self.bulk_upload_view), name='stickers_bulk_upload'),
+            path('bulk-upload/', self.admin_site.admin_view(self.bulk_upload_view), name='stickers_sticker_bulk_upload'),
         ]
         return custom + urls
 
@@ -118,7 +116,7 @@ class StickerAdmin(ModelAdmin):
                     f'Uploaded {created} sticker{"s" if created != 1 else ""} to "{category.name}".',
                     messages.SUCCESS,
                 )
-                return redirect('admin:stickers_sticker_changelist')
+                return redirect('admin:stickers_sticker_changelist') 
         else:
             form = BulkUploadForm()
 
